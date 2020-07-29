@@ -8,7 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <script src="{{asset('js/vue.js')}}"></script>
+        <script src="{{asset('js/axios.js')}}"></script>
         <!-- Styles -->
         <style>
             html, body {
@@ -80,28 +81,39 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title m-b-md" id="app1">
                     <form method="get" action="">
                         @csrf
                         <div class="form-group">
-                            <input type="text" name="search" id="search" class="form-control">
+                            <input type="text" name="search" id="search" class="form-control" v-model="searchBody">
                             <input type="submit" name="submit" value="submit" >
                         </div>
 
                     </form>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
             </div>
         </div>
+    <script>
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+                searchBody: ''
+            },
+            methods:{
+                search:function () {
+                    axios.get('/search-user', {
+                        userName: app1.searchBody,
+                    })
+                        .then(function (response) {
+                            console.log(response.data);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+        })
+    </script>
     </body>
 </html>

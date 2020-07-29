@@ -110,7 +110,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Encryption Key
+    | Encryption Key  ar_JO
     |--------------------------------------------------------------------------
     |
     | This key is used by the Illuminate encrypter service and should be set
