@@ -110,7 +110,7 @@
                        axios.get("/search/"+this.searchBody, {
                        })
                            .then(function (response) {
-                               console.log(response.data);
+                               //console.log(response.data);
                                for (var i=0 ;i<response.data.length;i++)
                                {
                                    li = document.createElement('li');
