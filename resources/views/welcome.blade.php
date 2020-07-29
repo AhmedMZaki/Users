@@ -81,7 +81,14 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <form method="get" action="">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" name="search" id="search" class="form-control">
+                            <input type="submit" name="submit" value="submit" >
+                        </div>
+
+                    </form>
                 </div>
 
                 <div class="links">
