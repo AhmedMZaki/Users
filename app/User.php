@@ -42,7 +42,7 @@ class User extends Authenticatable
     {
 
         return self::query()
-            ->select('*')
+            ->select('name')  // just select the name if need all user info use * , else use ['name','email']
             ->where('name', 'like', '%'.self::optimzeSearchInput($name).'%')
             ->get();
     }

@@ -92,7 +92,6 @@
                 </div>
 
                 <div>
-                    <lable>search result</lable>
                     <ul id="list">
                     </ul>
                 </div>
