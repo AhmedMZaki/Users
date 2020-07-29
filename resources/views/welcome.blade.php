@@ -82,16 +82,20 @@
 
             <div class="content">
                 <div class="title m-b-md" id="app1">
-                    <form method="get" action="">
+                    <form method="get" action="" @submit.prevent="search">
                         @csrf
                         <div class="form-group">
                             <input type="text" name="search" id="search" class="form-control" v-model="searchBody">
                             <input type="submit" name="submit" value="submit" >
                         </div>
-
                     </form>
                 </div>
 
+                <div>
+                    <lable>search result</lable>
+                    <ul id="list">
+                    </ul>
+                </div>
             </div>
         </div>
     <script>
@@ -102,15 +106,25 @@
             },
             methods:{
                 search:function () {
-                    axios.get('/search-user', {
-                        userName: app1.searchBody,
-                    })
-                        .then(function (response) {
-                            console.log(response.data);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                   if (this.searchBody)
+                   {
+                       axios.get("/search/"+this.searchBody, {
+                       })
+                           .then(function (response) {
+                               console.log(response.data);
+                               for (var i=0 ;i<response.data.length;i++)
+                               {
+                                   li = document.createElement('li');
+                                   li.innerHTML = response.data[0].name;
+                                   document.getElementById('list').appendChild(li);
+                               }
+                           })
+                           .catch(function (error) {
+                               alert('error');
+                           });
+                   }else{
+                       alert('you can not search for empty data');
+                   }
                 }
             }
         })

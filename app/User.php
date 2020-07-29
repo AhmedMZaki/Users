@@ -36,4 +36,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public static function SearchForUser($name)
+    {
+
+        return self::query()
+            ->select('*')
+            ->where('name', 'like', '%'.self::optimzeSearchInput($name).'%')
+            ->get();
+    }
+
+    public static function optimzeSearchInput($name)
+    {
+        $patterns = array("/إ|أ|آ/", "/ي|ئ/", "/ة/", "/ؤ/");
+        $replacements = array("ا", "ى", "ه", "و");
+       return preg_replace($patterns, $replacements, $name);
+    }
 }
